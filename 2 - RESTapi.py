@@ -13,13 +13,18 @@ url = "https://jsonmock.hackerrank.com/api/tvseries"
 
 def bestInGenre(genre):
     heighest_rated_serie = (f"Ninguna serie forma parte del género {genre}", -1) # Knowing all ratings are equal or greater than 0
-    tvSeries = requests.get(url).json()
-
-    totalPages = tvSeries["total_pages"]
+    try:
+        tvSeries = requests.get(url).json()
+        totalPages = tvSeries["total_pages"]
+    except Exception as e:
+        return f"Error al buscar las series: {e}"
 
     for pageNumber in range(1, totalPages + 1):
-        if pageNumber != 1:
-            tvSeries = requests.get(url + f"?page={pageNumber}").json()
+        try:
+            if pageNumber != 1:
+                tvSeries = requests.get(url + f"?page={pageNumber}").json()
+        except Exception as e:
+            return f"Error al buscar las series: {e}"
 
         for tvSerie in tvSeries["data"]:
             if genre in tvSerie["genre"].split(", "):
