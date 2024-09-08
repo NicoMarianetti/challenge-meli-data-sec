@@ -28,7 +28,11 @@ def update_neighbours(i, j, board, neighbours_board, amount_of_rows, amount_of_c
                         neighbours_board[neighbour[ROW]][neighbour[COLUMN]] += 1
 
 def neighbours_minesweeper(board):
+
     amount_of_rows = len(board)
+    if amount_of_rows == 0:
+         return []
+
     amount_of_columns = len(board[0]) # Knowing all columns have the same length
 
     # Part A
