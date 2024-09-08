@@ -122,11 +122,3 @@ def main():
     db.close()
 
 main()
-
-# Retrieve data from the table
-# select_query = "SELECT * FROM example_table"
-# cursor.execute(select_query)
-# results = cursor.fetchall()
-
-# for row in results:
-#     print(f"ID: {row[0]}, Name: {row[1]}, Age: {row[2]}")
