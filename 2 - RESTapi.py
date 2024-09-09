@@ -4,15 +4,19 @@ import requests
 
 NAME = 0
 IMDB_RATING = 1
+IMDB_RATING_SERIES_NOT_FOUND = -1
 
 # PREGUNTAS: ¿Qué devolver en caso de que ninguna serie sea parte del género buscado?
 #            ¿Dejo el main con que el probé la función?
 #            ¿Es case insensitive la entrada del usuario sobre el género?
 
+class SeriesNotFoundException(Exception):
+    pass
+
 url = "https://jsonmock.hackerrank.com/api/tvseries"
 
 def bestInGenre(genre):
-    heighest_rated_serie = (f"Ninguna serie forma parte del género {genre}", -1) # Knowing all ratings are equal or greater than 0
+    heighest_rated_serie = ("", IMDB_RATING_SERIES_NOT_FOUND) 
     try:
         tvSeries = requests.get(url).json()
         totalPages = tvSeries["total_pages"]
@@ -32,8 +36,12 @@ def bestInGenre(genre):
                     (tvSerie["imdb_rating"] == heighest_rated_serie[IMDB_RATING] and tvSerie["name"] < heighest_rated_serie[NAME]):
                     heighest_rated_serie = (tvSerie["name"], tvSerie["imdb_rating"])
 
+    if heighest_rated_serie[IMDB_RATING] == IMDB_RATING_SERIES_NOT_FOUND:
+        raise SeriesNotFoundException("Either no the series belongs to that genre, or the genre does not exists.")
+
     return heighest_rated_serie[NAME]
 
+def main():
+    print(bestInGenre('Actio'))
 
-
-print(bestInGenre('Action'))
+main()
