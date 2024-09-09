@@ -4,12 +4,7 @@
 # https://wiki.python.org/moin/TimeComplexity
 
 # Definition:
-#  - n is the amount of rows in the board
-#  - m is the amount of columns in the board
-
-# PREGUNTAS: ¿Puedo asumir que las columnas tienen todas el mismo largo?
-#            ¿Dejo el main y la impresion de la matriz final? Lo use para probar manualmente mi código
-#            Cuando dice que el input se ve de esa forma, ¿puedo asumir que es una lista de listas o es una cadena que tengo que procesar?
+#  - n is the amount of rows in the board, knowing that the board is a square then n is also the amount of columns. Then n^2 is the amount of tiles on the board
 
 MINE = 1
 REPLACE_MINE = 9    
@@ -33,7 +28,7 @@ def neighbours_minesweeper(board):
     if amount_of_rows == 0:
          return []
 
-    amount_of_columns = len(board[0]) # Knowing all columns have the same length
+    amount_of_columns = amount_of_rows # Knowing the board is a square
 
     # Part A
     neighbours_board = [row.copy() for row in board]
@@ -50,23 +45,24 @@ def neighbours_minesweeper(board):
 # Complexity analysis of neighbours_minesweeper:
 
 # Part A
-# - Has a time complexity of O(n * m)
-# - Has a space complexity of O(n * m)
+# - Has a time complexity of O(n^2)
+# - Has a space complexity of O(n^2)
 
 # Part B
-# - Has a time complexity of O(n * m) because update_neighbours has a time complexity of O(1)
+# - Has a time complexity of O(n^2) because update_neighbours has a time complexity of O(1)
 # - Has a space complexity of O(1) because update_neighbours has a space complexity of O(1)
 
 # The resulting complexity of neighbours_minesweeper (and of the whole algorithm) is:
-# O(n * m) for time complexity
-# O(n * m) for space complexity
+# O(n^2) for time complexity
+# O(n^2) for space complexity
 
 def main():
     board = [
         [0, 1, 0, 0, 1],
         [0, 0, 1, 0, 0],
         [0, 1, 0, 1, 1],
-        [1, 1, 0, 0, 0]
+        [1, 1, 0, 0, 0],
+        [1, 1, 0, 1, 0]
     ]
 
     print("[")
