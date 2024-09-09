@@ -6,10 +6,6 @@ NAME = 0
 IMDB_RATING = 1
 IMDB_RATING_SERIES_NOT_FOUND = -1
 
-# PREGUNTAS: ¿Qué devolver en caso de que ninguna serie sea parte del género buscado?
-#            ¿Dejo el main con que el probé la función?
-#            ¿Es case insensitive la entrada del usuario sobre el género?
-
 class SeriesNotFoundException(Exception):
     pass
 

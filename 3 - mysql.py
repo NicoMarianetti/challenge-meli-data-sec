@@ -3,9 +3,6 @@
 import MySQLdb
 from datetime import datetime
 
-# PREGUNTAS: ¿Es necesario definir que pasa cuando se elimina una de las entradas en una tabla que es una foreign key en otra?
-#            Con tal de que imprima las filas del resultado de la query una por una ¿es suficiente?
-
 def connect_to_db(name):
     return MySQLdb.connect(
         host="localhost",
@@ -115,8 +112,12 @@ def main():
     cursor.execute(customers_with_more_than_3_failure_events_query)
     customers = cursor.fetchall()
 
+    headers = [header[0] for header in cursor.description]
+
+    print(f"{headers[0]:^20} | {headers[1]:^10}")
+    print("-" * 35)
     for customer in customers:
-        print(customer)
+        print(f"{customer[0]:^20} | {customer[1]:^10}")
 
     cursor.close()
     db.close()
